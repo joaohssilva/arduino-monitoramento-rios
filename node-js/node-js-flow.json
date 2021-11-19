@@ -1,0 +1,578 @@
+[
+    {
+        "id": "c5e8a592830790da",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2a6a03d0008b192c",
+        "type": "function",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "func": "var outputMsgs = [];\n\nvar ph = msg.payload[\"arnaldobrabo/ph\"];\nvar temp = msg.payload[\"arnaldobrabo/temperatura\"];\nvar sensoruv = msg.payload[\"arnaldobrabo/turbidez\"];  \n\nif(!msg.payload[\"arnaldobrabo/temperatura\"]){\n    temp = 0;\n}\n\noutputMsgs.push({payload:ph});\noutputMsgs.push({payload:temp});\noutputMsgs.push({payload:sensoruv});\n\nreturn outputMsgs;",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 760,
+        "wires": [
+            [
+                "140f2e67cf392518"
+            ],
+            [
+                "272916758d1c1a1b"
+            ],
+            [
+                "a89726a50ae5e3aa"
+            ]
+        ]
+    },
+    {
+        "id": "140f2e67cf392518",
+        "type": "ui_text",
+        "z": "c5e8a592830790da",
+        "group": "106bfab653b290ae",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "valor do pH",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1510,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "272916758d1c1a1b",
+        "type": "ui_text",
+        "z": "c5e8a592830790da",
+        "group": "106bfab653b290ae",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "valor do Temperatura",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1540,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a89726a50ae5e3aa",
+        "type": "ui_text",
+        "z": "c5e8a592830790da",
+        "group": "106bfab653b290ae",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "valor da Turbidez",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1530,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "82ef59c109984733",
+        "type": "serial in",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "serial": "b056b6a6b421e07f",
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "ed357439b8fea1d6"
+            ]
+        ]
+    },
+    {
+        "id": "311c5d646625ef6b",
+        "type": "function",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "func": "var outputMsgs = [];\n\nvar ph = msg.payload.sensorph;\nvar temp = msg.payload.sensortemp;\nvar sensoruv = msg.payload.sensoruv;  \n\noutputMsgs.push({payload:ph});\noutputMsgs.push({payload:temp});\noutputMsgs.push({payload:sensoruv});\n\n\nreturn outputMsgs;",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 480,
+        "wires": [
+            [
+                "cefbb05b5965aabf"
+            ],
+            [
+                "32edd82de5a542e1"
+            ],
+            [
+                "04301d90093ae583"
+            ]
+        ]
+    },
+    {
+        "id": "cefbb05b5965aabf",
+        "type": "mqtt out",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/ph",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3feffc88d55d8a1c",
+        "x": 1280,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "32edd82de5a542e1",
+        "type": "mqtt out",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/temperatura",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3feffc88d55d8a1c",
+        "x": 1310,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "04301d90093ae583",
+        "type": "mqtt out",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/turbidez",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3feffc88d55d8a1c",
+        "x": 1300,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "749f8c91387273f5",
+        "type": "mqtt in",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/ph",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3feffc88d55d8a1c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 620,
+        "y": 620,
+        "wires": [
+            [
+                "5c5a14d42bdad369"
+            ]
+        ]
+    },
+    {
+        "id": "9d7fe58960d03693",
+        "type": "mqtt in",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/temperatura",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3feffc88d55d8a1c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 610,
+        "y": 700,
+        "wires": [
+            [
+                "ce00850dd70288b0"
+            ]
+        ]
+    },
+    {
+        "id": "3a38aaccaf97295b",
+        "type": "mqtt in",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/turbidez",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3feffc88d55d8a1c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 620,
+        "y": 780,
+        "wires": [
+            [
+                "ecf9e611f1ec195a"
+            ]
+        ]
+    },
+    {
+        "id": "687caa9fcce012ba",
+        "type": "join",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "x",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1050,
+        "y": 700,
+        "wires": [
+            [
+                "82b5d7ac1d7b3150",
+                "2a6a03d0008b192c"
+            ]
+        ]
+    },
+    {
+        "id": "5c5a14d42bdad369",
+        "type": "split",
+        "z": "c5e8a592830790da",
+        "name": "phvalue",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 840,
+        "y": 620,
+        "wires": [
+            [
+                "687caa9fcce012ba"
+            ]
+        ]
+    },
+    {
+        "id": "ce00850dd70288b0",
+        "type": "split",
+        "z": "c5e8a592830790da",
+        "name": "temperaturavalue",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 850,
+        "y": 700,
+        "wires": [
+            [
+                "687caa9fcce012ba"
+            ]
+        ]
+    },
+    {
+        "id": "ecf9e611f1ec195a",
+        "type": "split",
+        "z": "c5e8a592830790da",
+        "name": "turbidezvalue",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 850,
+        "y": 780,
+        "wires": [
+            [
+                "687caa9fcce012ba"
+            ]
+        ]
+    },
+    {
+        "id": "82b5d7ac1d7b3150",
+        "type": "function",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "func": "var ph = msg.payload[\"arnaldobrabo/ph\"];\nvar temp = msg.payload[\"arnaldobrabo/temperatura\"];\nvar sensoruv = msg.payload[\"arnaldobrabo/turbidez\"];  \n\nif(!msg.payload[\"arnaldobrabo/temperatura\"]){\n    temp = 0;\n}\n\nmsg=\"(ph,temperatura,turbidez) values(\"+ ph +\",\" + temp + \",\" + sensoruv +\")\";\nvar topic=\"INSERT INTO data \" +msg;\nvar msg1={};\nmsg1.topic=topic;\n\nmsg1.payload = topic;\n\nreturn msg1;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 660,
+        "wires": [
+            [
+                "f4f94a5db6d587eb"
+            ]
+        ]
+    },
+    {
+        "id": "f4f94a5db6d587eb",
+        "type": "sqlite",
+        "z": "c5e8a592830790da",
+        "mydb": "80c5676632898140",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1670,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23a2c75cbf354056",
+        "type": "inject",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "warning",
+        "payloadType": "str",
+        "x": 670,
+        "y": 900,
+        "wires": [
+            [
+                "e8fdb8b7d10fb93e"
+            ]
+        ]
+    },
+    {
+        "id": "54f97611498e0f3b",
+        "type": "serial out",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "serial": "b056b6a6b421e07f",
+        "x": 1370,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "a359b9c3b4ebb16b",
+        "type": "twitter out",
+        "z": "c5e8a592830790da",
+        "twitter": "",
+        "name": "Tweet",
+        "x": 1550,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "ad57e714f325e28a",
+        "type": "function",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "func": "var twett = \"DEMONSTRAÇÃO PS DO ARNALDO BRABO 4SIA-FIAP 2021\";\nif(msg.payload=\"warning\"){\n    msg.payload = twett;\n    return msg;\n}\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1380,
+        "y": 980,
+        "wires": [
+            [
+                "a359b9c3b4ebb16b"
+            ]
+        ]
+    },
+    {
+        "id": "e8fdb8b7d10fb93e",
+        "type": "mqtt out",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/aviso",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3feffc88d55d8a1c",
+        "x": 910,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "24b2a1f5de7658c0",
+        "type": "mqtt in",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "topic": "arnaldobrabo/aviso",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3feffc88d55d8a1c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1150,
+        "y": 940,
+        "wires": [
+            [
+                "ad57e714f325e28a",
+                "54f97611498e0f3b"
+            ]
+        ]
+    },
+    {
+        "id": "ed357439b8fea1d6",
+        "type": "json",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 830,
+        "y": 480,
+        "wires": [
+            [
+                "311c5d646625ef6b"
+            ]
+        ]
+    },
+    {
+        "id": "2e7a57420ae0293a",
+        "type": "ui_button",
+        "z": "c5e8a592830790da",
+        "name": "",
+        "group": "106bfab653b290ae",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Enviar Aviso",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "warning",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 650,
+        "y": 980,
+        "wires": [
+            [
+                "e8fdb8b7d10fb93e"
+            ]
+        ]
+    },
+    {
+        "id": "106bfab653b290ae",
+        "type": "ui_group",
+        "name": "Monitoramento de valores",
+        "tab": "97040226d06e9ee3",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b056b6a6b421e07f",
+        "type": "serial-port",
+        "serialport": "COM4",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "3feffc88d55d8a1c",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.mqttdashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "80c5676632898140",
+        "type": "sqlitedb",
+        "db": "C:\\Users\\joaoh\\DataGripProjects\\Wakim\\CETESB_DATABASE",
+        "mode": "RWC"
+    },
+    {
+        "id": "97040226d06e9ee3",
+        "type": "ui_tab",
+        "name": "Demonstration_Tech_For_Good",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
